@@ -1,0 +1,161 @@
+# 💻 Portafolio — Paula Lisseth Navarro Cárdenas
+
+One page de portafolio profesional, construida con **HTML5, CSS3 y JavaScript vanilla** (sin frameworks ni dependencias externas), con estética de **terminal / tech en modo oscuro**. Pensada como carta de presentación técnica frente a reclutadores.
+
+🔗 **Demo en vivo:** `https://github.com/pau091/mi_portafolio.git`
+
+---
+
+## 📑 Tabla de contenido
+
+- [Vista previa de las secciones](#-vista-previa-de-las-secciones)
+- [Estructura del proyecto](#️-estructura-del-proyecto)
+- [Tecnologías usadas](#️-tecnologías-usadas)
+- [Cómo verlo en local](#-cómo-verlo-en-local)
+- [Cómo personalizar tu contenido](#️-cómo-personalizar-tu-contenido)
+- [Despliegue en GitHub Pages](#-despliegue-en-github-pages)
+- [Flujo de trabajo (Git Flow + Conventional Commits)](#-flujo-de-trabajo-git-flow--conventional-commits)
+- [Checklist de calidad](#-checklist-de-calidad)
+
+---
+
+## 📸 Vista previa de las secciones
+
+| Sección | id | Contenido |
+|---|---|---|
+| **Inicio** | `#inicio` | Hero con terminal animada (efecto de tipeo) que se presenta con nombre, rol y un resumen corto. |
+| **Sobre mí** | `#sobre-mi` | Foto de perfil, datos personales (nombre, edad, fecha de nacimiento, ubicación) y descripción. |
+| **Skills** | `#skills` | Conocimientos técnicos: Python, JavaScript, Introducción a programación, MySQL, Frontend, Backend, IA, Git/GitHub, Scrum — cada uno con barra de progreso. |
+| **Habilidades Blandas** | `#habilidades-blandas` | 8 tarjetas de soft skills (comunicación, trabajo en equipo, liderazgo, adaptabilidad, creatividad, gestión del tiempo, empatía, resolución de problemas) + frase de introducción personal. |
+| **Proyectos** | `#proyectos` | Tarjetas con imagen, descripción, tags y enlaces a **Código** (repositorio) y **Demo** (versión en vivo). |
+| **Contacto** | `#contacto` | Datos de contacto (correo, GitHub, LinkedIn) y formulario de contacto (demo, sin backend real). |
+
+Todas las secciones tienen **animaciones al hacer scroll** (aparecen suavemente) y **animaciones hover** (las tarjetas se elevan, los íconos rotan, los links se subrayan) para dar una sensación pulida e interactiva.
+
+---
+
+## 🗂️ Estructura del proyecto
+
+```
+portafolio/
+├── index.html              # Página principal (HTML semántico, una sola página)
+├── assets/
+│   ├── css/
+│   │   └── styles.css      # Todo el diseño: variables, dark theme, responsive, animaciones
+│   ├── js/
+│   │   └── main.js         # Terminal animada, menú móvil, scroll reveal, formulario, etc.
+│   └── img/
+│       └── foto-perfil.svg # Placeholder liviano — reemplázalo por tu foto real
+├── .gitignore
+└── README.md
+```
+
+> Todo el sitio vive en **un solo `index.html`** con navegación por anclas (`#sobre-mi`, `#skills`, etc.) — no hay rutas ni páginas adicionales.
+
+---
+
+## 🛠️ Tecnologías usadas
+
+- **HTML5** semántico (`header`, `nav`, `main`, `section`, `article`, `footer`)
+- **CSS3**: variables (`:root`), Grid, Flexbox, media queries, `@keyframes`, `prefers-reduced-motion`
+- **JavaScript vanilla** (ES6+, sin librerías): `IntersectionObserver`, manipulación del DOM, eventos
+- **Tipografías** (Google Fonts): [Inter](https://fonts.google.com/specimen/Inter) (texto general) + [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) (acentos tipo código)
+- **Iconografía**: SVG inline escritos a mano (sin librerías de iconos externas, para que cargue más rápido)
+
+---
+
+## 🚀 Cómo verlo en local
+
+No necesita instalación ni dependencias. Basta con abrir el archivo en el navegador:
+
+1. Descarga o clona la carpeta del proyecto.
+2. Haz doble clic en `index.html` (o ábrelo con la extensión **Live Server** de VS Code para recarga automática).
+
+```bash
+# Alternativa: levantar un servidor local simple
+python3 -m http.server 8080
+# y abrir http://localhost:8080 en el navegador
+```
+
+---
+
+## ✏️ Cómo personalizar tu contenido
+
+1. **Tu foto**: agrega tu imagen optimizada (idealmente `.webp` o `.jpg` comprimido, máx. ~150–200 KB, formato cuadrado) en `assets/img/`, por ejemplo `foto-perfil.jpg`, y actualiza la ruta en `index.html`:
+   ```html
+   <img class="about__photo" src="assets/img/foto-perfil.jpg" alt="Foto de Paula Navarro" />
+   ```
+2. **Tus datos de contacto**: en la sección `#contacto`, reemplaza el correo, GitHub y LinkedIn de ejemplo por los tuyos reales.
+3. **Tus proyectos**: edita las tarjetas dentro de `<section id="proyectos">`. Cambia título, descripción, tags, imagen y, sobre todo, los enlaces:
+   ```html
+   <a href="https://github.com/tu-usuario/tu-repo" target="_blank" rel="noopener">Código ↗</a>
+   <a href="https://tu-usuario.github.io/tu-repo" target="_blank" rel="noopener">Demo ↗</a>
+   ```
+   Si un proyecto no tiene versión desplegada en vivo, simplemente elimina la línea de **Demo** y deja solo **Código**.
+4. **Tus skills**: ajusta el porcentaje de cada barra de progreso (`style="width: 65%;"`) según tu nivel real en `#skills`.
+5. **Tus habilidades blandas**: el texto de introducción y las 8 tarjetas en `#habilidades-blandas` se pueden editar libremente (título, ícono SVG, descripción).
+
+
+
+
+## 🌱 Flujo de trabajo (Git Flow + Conventional Commits)
+
+Este proyecto sigue una estructura simple de **Git Flow**:
+
+- `main` → versión estable y desplegada (cada cierre de versión se marca con un *tag*, ej. `v1.0.0`).
+- `develop` → rama de integración de nuevas funcionalidades.
+- `feature/nombre-feature` → una rama por cada funcionalidad nueva, fusionada a `develop` con `--no-ff`.
+
+```bash
+git checkout develop
+git checkout -b feature/nueva-seccion
+# ... trabajas, haces commits ...
+git checkout develop
+git merge feature/nueva-seccion --no-ff
+git checkout main
+git merge develop --no-ff
+git push origin main develop --tags
+```
+
+### Convención de commits
+
+Se usan **Conventional Commits** con emojis para que el historial sea claro y profesional:
+
+| Tipo | Emoji | Uso |
+|---|---|---|
+| `feat` | ✨ | Nueva funcionalidad o sección |
+| `fix` | 🐛 | Corrección de errores |
+| `style` | 💄 | Cambios visuales/CSS sin alterar la lógica |
+| `docs` | 📝 | Documentación (README, comentarios) |
+| `refactor` | ♻️ | Mejora de código sin cambiar comportamiento |
+| `perf` | ⚡️ | Mejoras de rendimiento (optimización de imágenes, etc.) |
+| `chore` | 🔧 | Tareas de mantenimiento, configuración |
+| `merge` | 🔀 | Fusión de ramas |
+
+Ejemplos reales usados en este proyecto:
+```
+feat: ✨ agrega sección de habilidades blandas (soft skills)
+feat: ✨ agrega animaciones hover en toda la página
+feat: ✨ personaliza contenido con datos reales de Paula Navarro
+style: 💄 implementa diseño dark theme con estética terminal
+docs: 📝 actualiza README con estructura real del proyecto
+```
+
+---
+
+## ✅ Checklist de calidad
+
+- [x] **Responsive**: se adapta a móvil, tablet y escritorio (breakpoints en 900px, 720px y 480px)
+- [x] **Contraste de colores**: texto claro sobre fondo oscuro, paleta verde/ámbar atenuada (no saturada)
+- [x] **Imágenes optimizadas**: `loading="lazy"`, dimensiones definidas, placeholder SVG liviano (<1 KB)
+- [x] **HTML semántico**: `header`, `nav`, `main`, `section`, `article`, `footer` en lugar de `div` genéricos
+- [x] **Navegación clara**: menú fijo con scroll suave, resaltado automático de la sección activa, menú hamburguesa en móvil
+- [x] **Accesibilidad**: foco visible en elementos interactivos, soporte para `prefers-reduced-motion`, atributos `alt` y `aria-label`
+- [x] **Animaciones**: scroll reveal al entrar en viewport + microinteracciones hover en botones, tarjetas e íconos
+
+---
+
+## 👤 Sobre la autora
+
+**Paula Lisseth Navarro Cárdenas** — 17 años — Desarrolladora Junior en formación.
+Conocimientos en Python, JavaScript, MySQL, Git/GitHub, Scrum, fundamentos de backend, frontend e inteligencia artificial.
